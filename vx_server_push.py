@@ -43,6 +43,14 @@ def send_tomsg(token,title,body,touserid):
     else:
         return False
 
+@app.route("/delsession/")
+def delsession():
+    if session.get('acctoken'):
+        session.pop('acctoken')
+        return 'ok'
+    else:
+        return 'no'
+
 @app.route("/msg/")
 def test():
     title = request.args.get("title")
