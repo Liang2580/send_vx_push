@@ -62,7 +62,7 @@ def test():
     touserid=request.args.get("touserid")
     if not session.get("acctoken"):
         session['acctoken']=get_acctoken()
-    print(session.get("acctoken"))
+    #print(session.get("acctoken"))
     if not session.get("error_count"):
         session['error_count']=1
     if session.get("acctoken"):
