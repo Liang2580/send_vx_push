@@ -66,7 +66,7 @@ def test():
     if not session.get("error_count"):
         session['error_count']=1
     if session.get("acctoken"):
-        print(session.get("acctoken"))
+        #print(session.get("acctoken"))
         if send_tomsg(session.get("acctoken"),title,body,touserid):
             return "发送成功"
         else:
