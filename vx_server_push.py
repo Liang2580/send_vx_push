@@ -8,7 +8,8 @@ app.config["SECRET_KEY"] = "131"
 import requests
 appID='xxx'
 appsecret='xxx'
-template_id="xxxx"
+template_id="xxx"
+
 
 def get_acctoken():
     url = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=" + appID + "&secret=" + appsecret
@@ -62,10 +63,20 @@ def test():
     if not session.get("acctoken"):
         session['acctoken']=get_acctoken()
     print(session.get("acctoken"))
+    if not session.get("error_count"):
+        session['error_count']=1
     if session.get("acctoken"):
+        print(session.get("acctoken"))
         if send_tomsg(session.get("acctoken"),title,body,touserid):
             return "发送成功"
         else:
+            errr_count=session.get("error_count")
+            if isinstance(errr_count,int):
+                session['error_count']=errr_count+1
+                if errr_count+1>10:
+                    session.pop('acctoken')
+                    session.pop('error_count')
+                    session.clear()
             return "发送失败"
     else:
         return 'acctoken error'
