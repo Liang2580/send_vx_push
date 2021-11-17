@@ -43,14 +43,17 @@ def send_tomsg(token,title,body,touserid):
     else:
         return False
 
+##删除当前的acctoken 可能过期了
 @app.route("/delsession/")
 def delsession():
     if session.get('acctoken'):
         session.pop('acctoken')
+        session.clear()
         return 'ok'
     else:
         return 'no'
 
+#发送消息
 @app.route("/msg/")
 def test():
     title = request.args.get("title")
@@ -66,6 +69,9 @@ def test():
             return "发送失败"
     else:
         return 'acctoken error'
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0',port=9916,debug=True)
+
+    #curl http://127.0.0.1:9916/msg?title=111&body=22&touserid=xxx
 
