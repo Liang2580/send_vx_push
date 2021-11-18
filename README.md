@@ -1,5 +1,4 @@
-# send_vx_push
-
+#简易Server 酱微信公众号推送消息
 
 ```php
 
